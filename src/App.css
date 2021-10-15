@@ -11,10 +11,23 @@ a {
 nav {
   padding-top: 1rem;
 }
+
+nav a {
+  color: coral;
+}
+
 div {
   margin: .6rem;
 }
 
 img {
   border-radius: 10rem;
+}
+
+li {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: coral;
 }

@@ -4,6 +4,8 @@ import axios from "axios";
 import { Route } from "react-router-dom";
 import HomePage from './HomePage'
 import Pizza from "./Pizza";
+import * as yup from 'yup'
+import schema from './FormSchema'
 
 const initialValues = {
   orderName: '',
@@ -27,6 +29,8 @@ const App = () => {
 
   const [orders, setOrders] = useState(ordersArray)
   const [formValues, setFormValues] = useState(initialValues)
+  const [formErrors, setFormErrors] = useState(initialErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
 
   const postOrder = newOrder => {
     axios.post('https://reqres.in/api/orders', newOrder)
@@ -41,7 +45,15 @@ const App = () => {
       })
   }
 
+  const validate = (name, value) => {
+    yup.reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: '' }))
+      .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }))
+  }
+
   const inputChange = (name, value) => {
+    validate(name, value)
     setFormValues({
       ...formValues, [name]: value
     })
@@ -57,10 +69,21 @@ const App = () => {
     postOrder(newOrder)
   }
 
+  useEffect(() => {
+    schema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
+  console.log(orders)
   return (
     <div className='App'>
       <Route path='/pizza'>
-        <Pizza />
+        <Pizza
+          values={formValues}
+          change={inputChange}
+          submit={formSubmit}
+          errors={formErrors}
+          disabled={disabled}
+          orders={orders}
+        />
       </Route>
       <Route exact path='/'>
         <HomePage />

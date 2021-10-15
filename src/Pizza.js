@@ -108,9 +108,9 @@ const Pizza = (props) => {
                         />
                     </label>
                 </div>
-                <div>
-                    <div>{errors.orderName}</div>
-                    <div>{errors.size}</div>
+                <div className='errors-div'>
+                    <div id='name-error'>{errors.orderName}</div>
+                    <div id='size-error'>{errors.size}</div>
                 </div>
                 <button disabled={disabled} id='order-button'>
                     Order

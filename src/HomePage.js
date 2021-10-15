@@ -18,6 +18,11 @@ const HomePage = (props) => {
                     </button>
                 </Link>
             </div>
+            <div>
+                <img src='https://images.unsplash.com/photo-1594007654729-407eedc4be65?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=428&q=80' alt='Pizza' />
+            </div>
         </>
     )
 }
+
+export default HomePage

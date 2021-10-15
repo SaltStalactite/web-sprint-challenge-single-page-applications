@@ -72,7 +72,7 @@ const App = () => {
   useEffect(() => {
     schema.isValid(formValues).then(valid => setDisabled(!valid))
   }, [formValues])
-  console.log(orders)
+
   return (
     <div className='App'>
       <Route path='/pizza'>
